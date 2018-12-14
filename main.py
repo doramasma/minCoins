@@ -17,15 +17,21 @@ def getParameters():
     parser.add_argument("-tabulation","--tabulation", help="Print tabulation implementation result",
                         action="store_true")
     parser.add_argument('integers', metavar='N', type=int, nargs='+',
-                        help='an integer')                     
+                        help='an integer')
+    parser.add_argument("File", help="File to open",type=str)                     
     args = parser.parse_args()
     global tabul
     tabul = 0
     global timer
     timer = 0
+    global fileArray
+    fileArray = ""
     if not args.integers:
             logging.exception("Value is required")
             sys.exit(2)
+    if args.File:
+        fileArray = args.File
+        print(fileArray)
     if args.tabulation:
         tabul = 1
     if args.time:
@@ -36,7 +42,7 @@ def getParameters():
 
 if __name__ == '__main__':
     value = getParameters()
-    Coins = fileToArray("test.txt")  
+    Coins = fileToArray(fileArray)  
 
     if tabul == 1:
         if timer == 1:
